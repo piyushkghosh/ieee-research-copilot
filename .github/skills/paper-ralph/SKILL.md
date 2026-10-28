@@ -49,12 +49,24 @@ story passes.
 ## Loop (one story per iteration)
 
 1. `node scripts/ralph-status.mjs --next` → prints the highest-priority story with `passes:false`.
-2. Delegate it to its owner agent with: story text, acceptance check, file paths, checklist IDs. Nothing else. Do not restate the whole plan.
+2. **Delegate it as a subagent.** Invoke the owner agent through the subagent tool
+   (`task` in GitHub Copilot; `agent` in the Local harness), naming the agent
+   explicitly, and pass only: story text, acceptance check, file paths, checklist IDs.
+   Do not restate the whole plan.
+
+   The loop driver never performs a story itself. If delegation fails twice, stop with
+   `DELEGATION_UNAVAILABLE` and the error — no inline fallback.
 3. Run the acceptance check yourself (a script, `bash scripts/build-pdf.sh`, `bash scripts/audit-tex.sh`, or a gate agent). An acceptance check is evidence, not opinion.
 4. Pass → set `passes:true` in `ralph.json`, append one line to `research/.state/progress.md`
    (`<iso-time> | <id> <title> | PASS | <evidence>`), move on **without narrating**.
 5. Fail → append the failure to `progress.md`, increment `rounds`, re-dispatch the same owner with only the failure text. Three failed rounds on one story = genuine blocker: report and stop.
 6. Stop when `ralph-status.mjs` exits 0, or on a real blocker.
+
+## Parallelism
+
+Stories writing disjoint files may be dispatched in the same turn (e.g. literature and
+methodology). Stories sharing a file (results → discussion) run in sequence. Never let
+two subagents edit the same file concurrently.
 
 ## Story set (default order)
 

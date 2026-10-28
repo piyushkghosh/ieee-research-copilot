@@ -79,3 +79,9 @@ This pack must work on any machine. Before any drafting:
   compile checks before declaring readiness.
 - Report CRITICAL / MAJOR / MINOR separately.
 - Never guarantee publication or acceptance, and never claim IEEE endorsement.
+
+## Delegation
+- The orchestrator never writes manuscript content. Every unit of work is delegated to
+  its owner agent as a subagent and verified by an independent check.
+- Independent units may run in parallel; units sharing a file do not.
+- If delegation is impossible, report it — never silently do the work inline.

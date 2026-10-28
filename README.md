@@ -103,6 +103,36 @@ Windows-specific notes:
 
 ---
 
+## Updating an existing install
+
+The installer can refresh agents, skills, prompts, and scripts in place. Your own work —
+`research/inputs/`, `research/literature/`, datasets, experiments, figures, and `.state/` —
+is never touched.
+
+```bash
+npx -y github:piyushkghosh/ieee-research-copilot update .
+```
+
+Then **Developer: Reload Window** and start a **new chat**. Agents, skills, and prompts
+are read from disk at load time, so an open chat keeps the old instructions until you do
+both. Add `--force` if you also want to overwrite files you edited by hand.
+
+## Delegation is mandatory
+
+The orchestrator is a loop driver, not a writer. Every story and every fix round is
+dispatched to its owner agent as a **subagent** (`task` in GitHub Copilot), and each
+result is verified by an independent check: a script, a build, or a read-only gate.
+
+| Rule | Effect |
+|---|---|
+| Orchestrator writes only `loop.md`, `plan.md`, `ralph.json`, `progress.md` | manuscript text always comes from a specialist |
+| Gates are read-only | they report `PASS`/`BLOCK`, they never rewrite |
+| Independent stories dispatch in parallel | disjoint files only; shared files stay sequential |
+| `DELEGATION_UNAVAILABLE` | if a subagent cannot be invoked, the run stops instead of working inline |
+
+You will see lines like `[5/15] Methodology — PASS (owner: methodology, rounds: 1)`, which
+is the delegation trail: who did the work, and what proved it.
+
 ## Low-token autonomous mode
 
 `/paper-start` interviews you. If you would rather spend credits on the paper than on answers, use:
