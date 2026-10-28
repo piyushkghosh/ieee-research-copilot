@@ -14,3 +14,11 @@ __pycache__/
 *.fdb_latexmk
 *.synctex.gz
 research/.state/bootstrap.log
+
+# per-machine + per-author research state (never share between testers)
+research/.state/toolkit.md
+research/literature/
+research/manuscript/literature-matrix.md
+research/inputs/papers/*.pdf
+research/figures/*/
+research/manuscript/build/
