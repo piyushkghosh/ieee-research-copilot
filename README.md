@@ -35,6 +35,32 @@ In VS Code, open Copilot Chat, select the **research-orchestrator** agent, and s
 
 That is the only command you need. `/paper-start` is a pipeline, not a form: it detects your toolchain, writes the toolchain report, and then interviews you before a single sentence is drafted.
 
+### Install without a wrapper folder
+
+GitHub's "Download ZIP" and `git clone` always create a folder named after the repo. If you want the pack to sit directly in a folder you already have open in VS Code, use one of these:
+
+```bash
+# A. clone into the current (empty) folder — no wrapper folder
+mkdir -p my-paper && cd my-paper
+git clone https://github.com/piyushkghosh/ieee-research-copilot.git .
+
+# B. release zip: extract in place, no wrapper
+curl -L -o copilot.zip https://github.com/piyushkghosh/ieee-research-copilot/releases/download/v1.1.0/ieee-research-copilot-v1.1.0.zip
+unzip -q copilot.zip -d .          # .github/ scripts/ research/ appear at top level
+
+# C. if you already downloaded the normal zip
+unzip -q ieee-research-copilot-master.zip && cp -r ieee-research-copilot-master/. . && rm -rf ieee-research-copilot-master
+```
+
+Windows PowerShell equivalent for A:
+
+```powershell
+mkdir my-paper; cd my-paper
+git clone https://github.com/piyushkghosh/ieee-research-copilot.git .
+```
+
+VS Code only loads `.github/agents/` and `.github/skills/` when they are at the **root of the opened folder**, so the wrapper folder is the usual reason agents appear missing.
+
 ### Windows
 
 The pack runs on Windows; the only extra requirement is a POSIX shell, which Git for Windows supplies.
