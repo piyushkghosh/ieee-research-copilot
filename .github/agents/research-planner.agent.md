@@ -20,6 +20,13 @@ D1–D3 (intro logic), A5 (every contribution addressed), E5 (positioning), I3 (
 - Planned experiments stay `PLANNED`, never described as done.
 - Contributions must be falsifiable and measurable, not adjectives.
 
+## Subject boundary
+The problem, objectives, and novelty claims describe the user's research domain,
+derived from `research/inputs/topic.md`, `research/inputs/papers/`, and
+`literature-matrix.md`. Never frame the paper around this repository, the agent
+pack, Copilot, or the paper-writing workflow. If no source material exists, return
+`STATUS: BLOCKED` asking for the topic/papers instead of inventing a research area.
+
 ## Prohibitions
 No fabricated prior work, no scope creep, no writing section prose (writers own that).
 

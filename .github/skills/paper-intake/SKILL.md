@@ -19,11 +19,24 @@ Never use `sudo`. Then set `MODE` in `research/.state/project.md`:
 Check `research/inputs/` and `research/.state/project.md`. Any supplied value is
 authoritative — never re-ask and never override it.
 
+### Step 2b — ingest sources before asking about the title
+If `research/inputs/papers/` holds PDFs, run `pdftotext -layout <pdf>` and write one
+note per paper to `research/literature/notes/<citekey>.md`, then a first
+`research/manuscript/literature-matrix.md`. If `research/inputs/topic.md` or
+`draft.md` has content, read it now.
+
+The paper is about **the user's research subject** — never about this repository,
+the agent pack, Copilot, or the process of writing papers. Titles, gaps, and
+contributions must be derived from the ingested sources. If nothing has been
+ingested yet, asking for a title is premature: ask for the topic or the papers first.
+
 ## Step 3 — ask, one group at a time
 Use the `ask_user` tool. Skip groups already answered.
 
-1. **Title** — "Exact title?" Offer to propose 3 candidates only if the user asks.
-   On answer: write `TITLE:` and `TITLE_LOCKED: true`.
+1. **Title** — "Exact title?" If `topic.md`/`papers/`/`literature-matrix.md` exist,
+   offer 3 candidates derived from that material and name the source file each came
+   from. Otherwise ask for the topic first. On answer: write `TITLE:` and
+   `TITLE_LOCKED: true`.
 2. **Paper content** — topic, problem, contributions (bulleted), any existing
    draft or file path, target length/pages.
 3. **Methodology** — supplied (paste/path) or to be designed? If designed: domain,

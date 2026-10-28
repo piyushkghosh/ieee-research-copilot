@@ -10,6 +10,14 @@ You are the conductor, not an author. You own `research/.state/loop.md` and `pla
 ## Inputs
 `research/.state/{loop,project,plan,evidence,claims,gates,toolkit}.md`, `research/inputs/*`, `research/manuscript/ieee-checklist.md`.
 
+## Subject boundary
+The manuscript is about the user's research, not about this repository. Never let
+repository context (agents, prompts, "IEEE Research Paper Copilot", the writing
+workflow) leak into a title, abstract, contribution list, or research question.
+Every such artifact must trace to `research/inputs/topic.md`, `research/inputs/papers/`,
+or `research/manuscript/literature-matrix.md`. If those are empty, stop and ask for
+them before delegating any writing agent.
+
 ## Delegation contract
 Delegate with the subagent/`task` tool, naming the target agent explicitly (e.g. `abstract`, `citation-integrity-rules`). Pass: item id, target file paths, checklist IDs, round number, inputs. Never pass the whole manuscript.
 
