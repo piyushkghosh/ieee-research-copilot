@@ -50,6 +50,22 @@ echo "== 5. figures gate =="
 if bash scripts/audit-tex.sh --figures >/dev/null 2>&1; then ok "no dangling float references"; else
   ok "dangling float reference detected (gate would BLOCK with the list printed by --figures)"; fi
 
+echo "== 6. style audit (AI-tell lint) =="
+if python3 scripts/style-audit.py --max-density 2.0 >/dev/null 2>&1; then
+  ok "style audit PASSES on current manuscript"
+else no "style audit reports tells over threshold"; fi
+TMP2=$(mktemp -d)
+printf 'This is not merely a tool but a groundbreaking realm, playing a crucial role.\n' >"$TMP2/bad.tex"
+if python3 scripts/style-audit.py "$TMP2/bad.tex" --max-density 2.0 >/dev/null 2>&1; then
+  no "style audit missed a known-bad paragraph"
+else ok "style audit FLAGS a known-bad paragraph (AI vocabulary + staging)"; fi
+rm -rf "$TMP2"
+
+echo "== 7. humanizer skill fetch (upstream, not vendored) =="
+if bash scripts/fetch-humanizer.sh >/dev/null 2>&1 && grep -q '^## A\. Staging' .humanizer/SKILL.md 2>/dev/null; then
+  ok "humanizer SKILL.md present ($(wc -c <.humanizer/SKILL.md | tr -d ' ') bytes) and gitignored"
+else no "humanizer SKILL.md unavailable — humanizer agent would block"; fi
+
 echo
 echo "SELFTEST: $PASS passed, $FAIL failed"
 [ "$FAIL" -eq 0 ] || exit 1

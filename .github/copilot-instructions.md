@@ -118,6 +118,22 @@ Every dispatch costs a premium request, so spend deliberately.
 - Independent units may run in parallel; units sharing a file do not.
 - If delegation is impossible, report it — never silently do the work inline.
 
+### The humanizer must load the upstream skill
+`bash scripts/fetch-humanizer.sh` writes the real blader/humanizer `SKILL.md` to
+`.humanizer/SKILL.md` (gitignored — upstream declares no license, so it is fetched per
+machine and never committed). The `humanizer` agent reads that file in full every
+invocation and applies all 26 patterns. A rewrite produced from memory, from a pattern
+summary, or from "a sense of style" is not a humanize pass: report
+`HUMANIZER_SKILL_UNAVAILABLE` and block instead.
+
+Acceptance for any humanized file, both checks required:
+- `bash scripts/audit-tex.sh --numbers <file> --against <file>.pre-humanize` → numbers identical
+- `python3 scripts/style-audit.py <file> --max-density 2.0` → exit 0, no critical tells
+
+The style audit is a lint for concrete tells (staging, AI vocabulary, inflated
+significance, sales language, -ing riders, curly quotes, chatbot residue), not an AI
+detector. Never promise a detector result.
+
 ## Final whole-paper pass
 Per-section humanizing is not the last word. Once every section has passed its own
 gates, run one whole-paper humanization pass over the assembled manuscript, then

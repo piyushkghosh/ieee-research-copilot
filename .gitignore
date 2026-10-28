@@ -24,3 +24,6 @@ research/figures/*/
 research/manuscript/build/
 
 research/.state/final-humanize-baseline/
+
+# upstream humanizer skill (downloaded per machine, never redistributed)
+.humanizer/

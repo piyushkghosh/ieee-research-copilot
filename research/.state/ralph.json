@@ -86,7 +86,7 @@
       "id": 11,
       "title": "Humanize every written section (per-stage)",
       "owner": "humanizer",
-      "acceptance": "bash scripts/audit-tex.sh --numbers <section> --against <section>.pre-humanize reports numbers OK for every section touched in story 8",
+      "acceptance": "bash scripts/fetch-humanizer.sh && python3 scripts/style-audit.py --max-density 2.0 (exit 0) and audit-tex.sh --numbers <section> --against <section>.pre-humanize reports identical",
       "passes": false,
       "rounds": 0
     },
@@ -126,7 +126,7 @@
       "id": 16,
       "title": "Whole-paper humanization (final pass)",
       "owner": "humanizer",
-      "acceptance": "bash scripts/final-humanize-check.sh --verify (exit 0; --snapshot before the pass)",
+      "acceptance": "bash scripts/fetch-humanizer.sh && python3 scripts/style-audit.py --max-density 2.0 (exit 0) and audit-tex.sh --numbers <section> --against <section>.pre-humanize reports identical",
       "passes": false,
       "rounds": 0
     }

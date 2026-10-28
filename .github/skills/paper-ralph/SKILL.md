@@ -102,6 +102,17 @@ Each story's `acceptance` must be checkable by a command or a gate verdict — n
 
 If `toolkit.md` says `degraded-markdown`, one line is enough: `compile gate SKIPPED (no TeX); run bash scripts/bootstrap.sh --tex-only for a PDF`. Do not stop the loop for this.
 
+### The humanizer must run the real skill
+The `humanizer` agent may not rewrite from memory or from a summary. Every invocation
+starts with `bash scripts/fetch-humanizer.sh` then `read .humanizer/SKILL.md` in full
+(32 KB, 26 numbered patterns, six sections A–F). If the file cannot be read, the story is
+`BLOCKED` with `HUMANIZER_SKILL_UNAVAILABLE` — a paraphrase pass does not count as
+humanized and must not be marked passing.
+
+A humanized section must also pass `python3 scripts/style-audit.py <file> --max-density 2.0`
+(exit 0, zero `critical` tells). The numbers invariant alone proves the facts survived; the
+style audit proves the tells were actually removed.
+
 ## Final whole-paper pass (story 16)
 Story 16 runs after every writing story has passed and before `Compile`.
 

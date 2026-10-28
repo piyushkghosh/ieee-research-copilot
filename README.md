@@ -170,6 +170,30 @@ node scripts/ralph-status.mjs --next   # next story + its acceptance check
 
 If a story fails three rounds it stops and tells you exactly what only you can supply. In `degraded-markdown` mode the compile story passes as `SKIPPED` — run `bash scripts/bootstrap.sh --tex-only` to get a real PDF.
 
+## Humanizer runs the real upstream skill
+
+The `humanizer` agent does not paraphrase a style guide from memory. Every invocation:
+
+1. `bash scripts/fetch-humanizer.sh` → downloads `blader/humanizer`'s `SKILL.md`
+   (32 KB, 26 numbered patterns, sections A–F) to `.humanizer/SKILL.md`.
+2. Reads that file **in full** and applies every pattern.
+3. Proves it did not damage the science:
+   `bash scripts/audit-tex.sh --numbers <file> --against <file>.pre-humanize` → identical,
+   and `python3 scripts/style-audit.py <file> --max-density 2.0` → exit 0.
+
+If the skill cannot be loaded the story blocks with `HUMANIZER_SKILL_UNAVAILABLE`. A
+memory-based rewrite is not a humanize pass, and it will be visible in the output.
+
+The upstream text is **never committed** — it has no license, so `.humanizer/` is
+gitignored and each machine fetches its own copy. `bash scripts/selftest.sh` verifies the
+fetch works and that the lint catches a known-bad paragraph.
+
+**On AI-writing detectors:** `style-audit.py` is a lint for concrete tells (not-X-but-Y
+staging, AI vocabulary, inflated significance, sales language, -ing riders, curly quotes,
+chatbot residue), not a detector. Removing the mechanics is what makes machine-drafted
+prose read as written work; no tool can promise a detector score, and the pack never
+claims one.
+
 ## Keeping Copilot credits low
 
 A full run is a chain of subagent dispatches. Each dispatch is a billed request, so the pack is tuned to spend as few as possible.

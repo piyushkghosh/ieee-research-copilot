@@ -45,7 +45,7 @@ fi
 PLAN=()
 [ "$need_tex" = 1 ] && PLAN+=("fetch IEEEtran.cls + IEEEtran.bst (+ optional algorithm2e/algpseudocode/siunitx) from CTAN into texmf/")
 [ "$TEX_ONLY" = 1 ] || {
-  [ "$DO_SKILLS" = 1 ] && PLAN+=("install humanizer skill: npx skills add blader/humanizer --agent '*'")
+  [ "$DO_SKILLS" = 1 ] && PLAN+=("fetch humanizer SKILL.md into .humanizer/ (upstream text, never committed)")
   [ "$DO_SKILLS" = 1 ] && PLAN+=("clone diagram-design into vendor/diagram-design (gitignored)")
   [ "$DO_PYTHON" = 1 ] && PLAN+=("pip3 install --user cairosvg (SVG→PDF for figures)")
 }
@@ -91,20 +91,20 @@ fi
 
 # ---------- 2. humanizer (never vendored: upstream declares no license) ----------
 if [ "$DO_SKILLS" = 1 ]; then
-  if [ -f ".github/skills/humanizer/SKILL.md" ] || [ -n "$(find .github/skills -maxdepth 2 -name SKILL.md -path '*humanizer*' 2>/dev/null)" ]; then
-    log "OK humanizer skill already installed"
-  elif have npx; then
-    log "installing humanizer via npx skills add blader/humanizer"
-    if (cd "$ROOT" && npx --yes skills add blader/humanizer --agent '*' >/dev/null 2>&1); then
-      log "OK humanizer skill installed (project-local)"
-    else
-      FAILED=$((FAILED+1)); log "FAIL humanizer install — run manually: npx skills add blader/humanizer --agent '*'"
-    fi
+  if [ -s "$ROOT/.humanizer/SKILL.md" ]; then
+    log "OK humanizer SKILL.md already present ($(wc -c <"$ROOT/.humanizer/SKILL.md" | tr -d ' ') bytes)"
   else
-    FAILED=$((FAILED+1)); log "FAIL npx missing — cannot install humanizer"
+    log "fetching humanizer SKILL.md into .humanizer/"
+    if bash "$ROOT/scripts/fetch-humanizer.sh" >>"$LOG" 2>&1; then
+      log "OK humanizer SKILL.md fetched — $(wc -c <"$ROOT/.humanizer/SKILL.md" | tr -d ' ') bytes"
+    else
+      FAILED=$((FAILED+1)); log "FAIL humanizer fetch — run: bash scripts/fetch-humanizer.sh"
+    fi
   fi
+fi
 
-  # ---------- 3. diagram-design (MIT, cloned on demand, gitignored) ----------
+# ---------- 3. diagram-design (MIT, cloned on demand, gitignored) ----------
+if [ "$DO_SKILLS" = 1 ]; then
   if [ -f "$ROOT/vendor/diagram-design/skills/diagram-design/SKILL.md" ]; then
     log "OK diagram-design cloned"
   elif have git; then
