@@ -20,7 +20,7 @@ Nothing is invented. Numbers must trace to a measured artifact, references must 
 | LaTeX (optional) | `pdflatex` + `IEEEtran` — if absent, the workspace degrades to Markdown |
 
 ```bash
-git clone https://github.com/<your-account>/ieee-research-copilot.git
+git clone https://github.com/piyushkghosh/ieee-research-copilot.git
 cd ieee-research-copilot
 code .
 ```
