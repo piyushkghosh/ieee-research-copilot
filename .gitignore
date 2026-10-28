@@ -1,0 +1,16 @@
+build/
+vendor/
+texmf/tex/latex/local/*.cls
+texmf/tex/latex/local/*.bst
+texmf/tex/latex/local/*.sty
+.venv/
+__pycache__/
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+research/.state/bootstrap.log

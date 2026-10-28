@@ -1,0 +1,50 @@
+% IEEE conference manuscript — build with: bash scripts/build-pdf.sh
+% The script sets TEXMFHOME=<repo>/texmf so IEEEtran.cls from ./texmf resolves.
+% If research/inputs/template/ contains a venue class, switch \documentclass to it
+% and record the change in research/.state/project.md (TEMPLATE: custom:...).
+\documentclass[conference]{IEEEtran}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{cite}
+
+% Bibliography switch: IEEEtran errors ("missing \item") on an empty bibliography.
+% The references agent sets \paperrefstrue once refs.bib holds verified entries.
+\newif\ifpaperrefs
+\paperrefsfalse
+\usepackage{url}
+\usepackage{microtype}
+\usepackage{balance}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% TODO(orchestrator): set \title from research/.state/project.md TITLE (locked)
+\title{Paper Title}
+\author{\IEEEauthorblockN{Author Name}\IEEEauthorblockA{Affiliation\\Email}}
+
+\begin{document}
+\maketitle
+
+\input{sections/abstract}
+\input{sections/intro}
+\input{sections/related}
+\input{sections/problem-formulation}
+\input{sections/methodology}
+\input{sections/implementation}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\input{sections/acknowledgment}
+\input{sections/appendix}
+
+\ifpaperrefs
+  \bibliographystyle{IEEEtran}
+  \bibliography{refs}
+\else
+  % refs.bib has no verified entries yet — enable with \paperrefstrue above.
+\fi
+
+\end{document}

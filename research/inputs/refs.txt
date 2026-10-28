@@ -1,0 +1,7 @@
+# Plain reference list / DOIs / URLs
+# One per line. The references agent will verify each and convert verified ones
+# to BibTeX. Unverifiable entries stay marked UNVERIFIED.
+
+# Supplied by user (verified against the PDFs themselves)
+10.1109/RMKMATE59243.2023.10369221  # Bhuvana Kumar & Kathiravan, Automatic music generation using RNN, RMKMATE 2023
+arXiv:2411.09080  # Nikolakakis et al., Language Models for Music Medicine Generation, ISMIR 2024 LBD
