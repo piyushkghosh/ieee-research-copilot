@@ -1,0 +1,12 @@
+{
+  "name": "ieee-research-copilot",
+  "version": "1.2.0",
+  "description": "Multi-agent IEEE research paper copilot for VS Code (GitHub Copilot): intake, gated writing loop, LaTeX build, integrity and citation audits.",
+  "type": "module",
+  "bin": { "ieee-research-copilot": "bin/ieee-copilot.mjs" },
+  "files": [".github/", "scripts/", "research/", "bin/", "README.md", "package.json"],
+  "engines": { "node": ">=18" },
+  "license": "MIT",
+  "keywords": ["ieee", "paper", "copilot", "agents", "latex", "research"],
+  "repository": { "type": "git", "url": "git+https://github.com/piyushkghosh/ieee-research-copilot.git" }
+}

@@ -35,6 +35,19 @@ In VS Code, open Copilot Chat, select the **research-orchestrator** agent, and s
 
 That is the only command you need. `/paper-start` is a pipeline, not a form: it detects your toolchain, writes the toolchain report, and then interviews you before a single sentence is drafted.
 
+### Install with npx (no folder wrapper)
+
+```bash
+npx ieee-research-copilot                 # once published to npm
+npx github:piyushkghosh/ieee-research-copilot init .   # works today, straight from GitHub
+```
+
+Both write `.github/`, `scripts/`, `research/` and `README.md` directly into the
+current folder. `npx ... update` refreshes agents and scripts while leaving
+`research/inputs`, `research/literature` and `.state` untouched; `--force` replaces
+everything; the installer refuses to overwrite an existing `.github/agents/`
+without it.
+
 ### Install without a wrapper folder
 
 GitHub's "Download ZIP" and `git clone` always create a folder named after the repo. If you want the pack to sit directly in a folder you already have open in VS Code, use one of these:
