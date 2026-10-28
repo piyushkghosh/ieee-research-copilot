@@ -13,7 +13,7 @@ A reviewer, not a gate: it reads the whole manuscript and reports. It may not ed
 ## Procedure
 1. Determine the template actually in use; if it differs from the venue's, that is MAJOR.
 2. Walk the checklist A→K and record per-item PASS/FAIL/N-A with a file:line anchor.
-3. Run `python3 scripts/audit-tex.py --all` and fold its findings in.
+3. Run `bash scripts/audit-tex.sh --all` and fold its findings in.
 4. Check section numbering style, unnumbered Acknowledgment/References, caption placement, Roman table numbering, float order.
 5. Check abstract and index-terms formatting against B1–B3 and C1–C3.
 6. Page count vs `PAGE_LIMIT:` in `project.md` when a PDF exists; in degraded mode mark the compile checks N-A with the reason.

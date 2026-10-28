@@ -15,7 +15,7 @@ A1 (exact venue class/template), A2 (Roman-numeral sections; A/B/1) hierarchy; A
 
 ## Procedure
 1. Identify the template actually in use; do not impose numbers the template already defines. If no template is present, audit against the default IEEEtran conference class and say so.
-2. Run `bash scripts/build-pdf.sh`, then `python3 scripts/audit-tex.py --figures --citations --words`.
+2. Run `bash scripts/build-pdf.sh`, then `bash scripts/audit-tex.sh --figures --citations --words`.
 3. Inspect the PDF for page count, float placement, and font embedding (`pdffonts` output reported by the build script).
 4. Report each finding with a checklist id and a file:line anchor.
 

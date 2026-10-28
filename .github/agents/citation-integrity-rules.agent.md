@@ -8,7 +8,7 @@ tools: ['read', 'search', 'execute']
 Read-only auditor. Protocol: `.github/skills/paper-gates/SKILL.md`. No edits.
 
 ## Procedure
-1. `python3 scripts/audit-tex.py --citations` — report unresolved keys (CRITICAL) and unused entries (MINOR).
+1. `bash scripts/audit-tex.sh --citations` — report unresolved keys (CRITICAL) and unused entries (MINOR).
 2. Spot-check every new entry's title/authors/venue/year/DOI against the publisher or a DOI resolver. Unverifiable → `[MAJOR] <key> marked UNVERIFIED — needs human check`.
 3. Check citation style: numbered brackets, ascending by first appearance, no "(Author, 2023)" forms.
 4. Check relevance: an entry cited for a claim it does not support is `[CRITICAL]` (misattribution).

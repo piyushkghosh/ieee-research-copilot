@@ -17,6 +17,8 @@ Nothing is invented. Numbers must trace to a measured artifact, references must 
 | VS Code | 1.100 or newer |
 | GitHub Copilot + Copilot Chat extension | signed in; custom agents and skills require a Copilot plan |
 | Node.js or Bash | used by the preflight script |
+| Git for Windows (Windows only) | also provides the `bash` the helper scripts run in |
+| Python 3 (optional) | used by `scripts/audit-tex.sh` and figure export; the wrapper finds `python3`, `python`, or `py` |
 | LaTeX (optional) | `pdflatex` + `IEEEtran` — if absent, the workspace degrades to Markdown |
 
 ```bash
@@ -32,6 +34,33 @@ In VS Code, open Copilot Chat, select the **research-orchestrator** agent, and s
 ```
 
 That is the only command you need. `/paper-start` is a pipeline, not a form: it detects your toolchain, writes the toolchain report, and then interviews you before a single sentence is drafted.
+
+### Windows
+
+The pack runs on Windows; the only extra requirement is a POSIX shell, which Git for Windows supplies.
+
+```powershell
+# once, from PowerShell
+winget install Git.Git
+winget install OpenJS.NodeJS.LTS
+winget install Python.Python.3.12      # optional; used for audits and figure export
+# then reopen PowerShell so PATH refreshes
+git clone https://github.com/piyushkghosh/ieee-research-copilot.git
+cd ieee-research-copilot
+code .
+```
+
+Inside VS Code everything is identical: Copilot Chat → **research-orchestrator** → `/paper-start`.
+
+Windows-specific notes:
+
+| Topic | Detail |
+|---|---|
+| Shell | `bash` ships with Git for Windows, so `bash scripts/...` works in PowerShell and in Copilot Chat. If `bash` is not found, reinstall Git with "Add Git to PATH". |
+| Bootstrap | `powershell -ExecutionPolicy Bypass -File scripts\bootstrap.ps1 -Yes` is a native equivalent of `bootstrap.sh` (no admin rights, fetches `IEEEtran` into `texmf\`). |
+| Python | Windows installs expose `python`/`py`, not always `python3`; `scripts/audit-tex.sh` tries all three. Tick "Add python.exe to PATH" during install. |
+| LaTeX | MiKTeX (`winget install MiKTeX.MiKTeX`) or TeX Live both work; `build-pdf.sh` sets `TEXMFHOME` to the project's `texmf\`, which is why no admin install is needed. Without any TeX engine the workspace stays in `degraded-markdown` mode and still produces the manuscript. |
+| Paths | Scripts use `BASH_SOURCE`/`$ROOT`, so spaces in `C:\Users\...` are handled; avoid OneDrive-synced folders if file watching misbehaves. |
 
 ---
 
@@ -162,8 +191,8 @@ bash scripts/preflight.sh          # what this machine can do → research/.stat
 bash scripts/bootstrap.sh          # fetch IEEEtran, install skills, converters
 bash scripts/bootstrap.sh --tex-only --yes
 bash scripts/build-pdf.sh          # BUILD: PASS|FAIL|SKIPPED, PAGES:, ISSUES:
-python3 scripts/audit-tex.py --all
-python3 scripts/audit-tex.py --numbers sections/results.tex --against /tmp/results.bak
+bash scripts/audit-tex.sh --all
+bash scripts/audit-tex.sh --numbers sections/results.tex --against /tmp/results.bak
 bash scripts/selftest.sh           # self-check of the pack
 bash scripts/new-project.sh ../my-paper
 ```

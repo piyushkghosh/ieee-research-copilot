@@ -10,7 +10,7 @@ tools: ['read', 'search', 'execute']
 
 ## Procedure
 1. Read every gate row. Any gate not PASS (and not legitimately SKIPPED with reason) blocks.
-2. Re-run the mechanical checks: `bash scripts/build-pdf.sh`, `python3 scripts/audit-tex.py --all`.
+2. Re-run the mechanical checks: `bash scripts/build-pdf.sh`, `bash scripts/audit-tex.sh --all`.
 3. Verify `evidence.md` has a MEASURED row for every number in the manuscript; verify `claims.md` has no `UNSUPPORTED`/`UNVERIFIED_SOURCE` rows.
 4. Confirm no open escalation in `loop.md` and no item still in `FIX`.
 5. Classify remaining issues CRITICAL / MAJOR / MINOR.

@@ -17,7 +17,7 @@ In-place rewrite of the single assigned section file. Nothing else.
 ## Mandatory invariant procedure (do not skip)
 1. `cp <section>.tex <section>.tex.pre-humanize`
 2. Rewrite.
-3. `python3 scripts/audit-tex.py --numbers <section>.tex --against <section>.tex.pre-humanize`
+3. `bash scripts/audit-tex.sh --numbers <section>.tex --against <section>.tex.pre-humanize`
 4. If it reports `numbers DIFFER` → restore the backup, report `STATUS: BLOCKED` with the diff. Never negotiate with the invariant.
 5. Only then delete the backup, and report the byte/word delta.
 

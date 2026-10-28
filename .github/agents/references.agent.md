@@ -16,7 +16,7 @@ J2 (bidirectional citation↔entry resolution), J3 (no fabricated authors/titles
 
 ## Rules
 - Verify title, authors, venue, year, and DOI against the publisher or DOI resolver before adding.
-- Run `python3 scripts/audit-tex.py --citations` and report missing/unused entries.
+- Run `bash scripts/audit-tex.sh --citations` and report missing/unused entries.
 - Keep BibTeX fields complete: author, title, booktitle/journal, year, pages, doi.
 - Unverifiable entries stay in the `.bib` with a `% UNVERIFIED: <reason>` comment and are reported, never silently dropped or invented.
 

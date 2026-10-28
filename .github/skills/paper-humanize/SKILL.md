@@ -45,7 +45,7 @@ figure/table references, claim strength, or technical terminology. Never add fac
 ```bash
 cp <section> /tmp/before.tex
 # ... edit ...
-python3 scripts/audit-tex.py --numbers /tmp/before.tex <section>
+bash scripts/audit-tex.sh --numbers /tmp/before.tex <section>
 ```
 The multiset of numbers, units, citations, and DOIs must be identical. Any diff is
 CRITICAL: revert and re-dispatch the writer. Then report what changed and any

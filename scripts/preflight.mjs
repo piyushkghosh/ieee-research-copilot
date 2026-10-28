@@ -66,6 +66,7 @@ const tools = {
   npm: probe('npm', 'npm', ['--version']),
   npx: probe('npx', 'npx', ['--version']),
   git: probe('git', 'git', ['--version'], /git version (\S+)/),
+  bash: probe('bash (POSIX shell)', 'bash', ['--version'], /GNU bash, version (\S+)/),
   python3: probe('Python 3', 'python3', ['--version'], /Python (\S+)/),
   pip3: probe('pip', 'pip3', ['--version'], /pip (\S+)/),
   pdflatex: probe('pdflatex', 'pdflatex', ['-v'], /pdfTeX ([\d.]+-\S+)/),
@@ -177,6 +178,14 @@ if (!cairosvg.ok) {
   });
 }
 if (!tools.git.present) fix.push({ item: 'git', commands: { all: ['install git — required to fetch diagram-design and humanizer'] } });
+if (!tools.bash.present) fix.push({ item: 'bash (POSIX shell) — helper scripts are shell scripts', commands: {
+  linux: ['already standard on Linux/macOS'],
+  darwin: ['already standard on Linux/macOS'],
+  win32: ['winget install Git.Git   # Git for Windows provides bash; reopen the terminal', '# then: bash scripts/preflight.sh'],
+} });
+if (process.platform === 'win32' && !tools.python3.present) fix.push({ item: 'Python 3 (audits + figure export)', commands: {
+  win32: ['winget install Python.Python.3.12', '# tick "Add python.exe to PATH"; scripts/audit-tex.sh accepts python3, python, or py'],
+} });
 if (!browser) fix.push({ item: 'headless browser', commands: { all: ['optional: used only for HTML→PDF figure fallback'] } });
 
 const report = {
