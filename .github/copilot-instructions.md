@@ -74,6 +74,27 @@ This pack must work on any machine. Before any drafting:
   issues, never a silent pass.
 - Parallel dispatch only for items whose output files are disjoint.
 
+## Methodology-first projects
+When the user supplies a methodology and little else, build the paper around that
+methodology: derive the problem statement, contributions, research questions, figure
+plan, and reference set from it. Record `SOURCE_OF_TRUTH: methodology` in
+`research/.state/project.md`. The user's methodology text is authoritative — never
+silently redesign it; propose improvements only as explicitly marked alternatives.
+
+## User corrections are permanent
+Every user-reported error or preference is appended to `research/.state/decisions.md`
+with an id, and is binding from then on. Read that file before drafting any section;
+pass the relevant `ACTIVE` rows to the writer you dispatch. Reintroducing a corrected
+item is a regression: `technical-consistency-rules` scores it CRITICAL.
+
+## Humanizer at every stage
+Humanizing is not a final polish. Every section is humanized before it leaves its
+writer stage, on every round, then checked mechanically:
+`bash scripts/audit-tex.sh --numbers <file> --against <file>.pre-humanize`.
+Any diff in numbers, units, citations, DOIs, or figure references is CRITICAL: restore
+the backup and re-dispatch. Humanizer never changes technical claims; formality is
+governed by `language-and-style-rules`.
+
 ## Final approval
 - Run citation, integrity, reproducibility, consistency, style, formatting, and
   compile checks before declaring readiness.

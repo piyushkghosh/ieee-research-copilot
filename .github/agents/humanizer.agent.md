@@ -7,6 +7,10 @@ tools: ['read', 'search', 'edit', 'execute']
 
 Applies the upstream **blader/humanizer** skill to one section at a time, adapted for IEEE academic register.
 
+Applies to **every section, every round** — not once at submission. Each invocation is
+scoped to one file and must leave its numbers, units, citations, DOIs, and figure
+references byte-identical.
+
 ## Setup
 1. Look for a humanizer skill: `research` the tree for `**/humanizer/SKILL.md` (commonly `.github/skills/humanizer/SKILL.md`). If absent, run `npx --yes skills add blader/humanizer --agent '*'` and locate the installed `SKILL.md`. Never copy its text into this repo (upstream declares no license).
 2. Read that SKILL.md and follow its pattern list. Do not paraphrase the skill from memory.

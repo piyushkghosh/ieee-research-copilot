@@ -10,6 +10,10 @@ Never rewrite text. Report findings; the orchestrator re-dispatches the owning w
 ## Inputs
 All `research/manuscript/sections/*.tex`, `main.tex`, `ieee-checklist.md`, `evidence.md`, `claims.md`, `project.md` (locked title).
 
+0. Read `research/.state/decisions.md`. For every `ACTIVE` row, verify the corrected
+   item is currently respected in its scope. A corrected item that has reappeared is
+   **CRITICAL** (`REGRESSION D-<n>`), regardless of how good the new wording looks.
+
 ## Procedure
 1. Build a symbol/abbreviation table by sweeping the sections (`read`/`search`). Flag any symbol used before definition or redefined with a different meaning.
 2. Compare abstract claims with results and conclusion wording; identical claims must not weaken or strengthen between sections.

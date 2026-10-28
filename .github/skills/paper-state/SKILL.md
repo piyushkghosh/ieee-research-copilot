@@ -25,3 +25,9 @@ current-value table.
 - `NEXT_ACTION` must be executable by a fresh agent with no memory of this
   conversation: name the agent, the file, and the checklist items.
 - Round counters only increase. Never reset to hide a failed loop.
+
+## `decisions.md`
+
+Append-only record of user corrections. The orchestrator owns appends; writers read.
+One row per correction: `D-<n> | date | scope | instruction | applied to | ACTIVE|SUPERSEDED`.
+Never rewrite history to make a later draft look consistent.

@@ -74,6 +74,18 @@ git clone https://github.com/piyushkghosh/ieee-research-copilot.git .
 
 VS Code only loads `.github/agents/` and `.github/skills/` when they are at the **root of the opened folder**, so the wrapper folder is the usual reason agents appear missing.
 
+### Methodology-only start
+
+If you already have the method, that is enough. Write it into `research/inputs/methodology.md` (or paste it in chat) and send:
+
+```
+/paper-run  use research/inputs/methodology.md as the method; derive everything else from it
+```
+
+The pack then treats your text as `SOURCE_OF_TRUTH: methodology` and derives the problem statement, contributions, research questions, figure plan, reference topics, title candidates, related-work framing, experiments and every section from it. Your methodology is never silently redesigned — proposed improvements are shown as marked alternatives.
+
+**Corrections stick.** If you say "that baseline is wrong" or "the title must stay X", the agent appends it to `research/.state/decisions.md` as `D-<n>`. Every later writer receives the ACTIVE entries, and `technical-consistency-rules` fails the paper with `REGRESSION D-<n>` if a corrected item reappears.
+
 ### Windows
 
 The pack runs on Windows; the only extra requirement is a POSIX shell, which Git for Windows supplies.
@@ -191,7 +203,7 @@ One iteration = one open item, carried to a verdict:
 
 A gate cannot pass itself by rewriting the text — the eight rule gates are read-only. After three rounds on the same item the orchestrator stops and escalates to you instead of iterating forever.
 
-Gate order: content → humanizer → language → consistency → compile → final submission.
+Gate order: content → humanizer → language → consistency → compile → final submission. The humanizer also runs inside **every** writing story, every round — not only once at the end.
 
 ### State lives on disk
 
@@ -205,6 +217,7 @@ Closing the chat, restarting VS Code, or losing the session costs nothing:
 | `research/.state/claims.md` | every claim, its evidence anchor, its status |
 | `research/.state/gates.md` | one row per gate run: verdict, round, issue counts |
 | `research/.state/loop.md` | round, phase, open items, next action |
+| `research/.state/decisions.md` | append-only log of your corrections; agents must never regress an ACTIVE entry |
 | `research/.state/toolkit.md` | what this machine can actually do |
 
 Re-invoking the orchestrator resumes from `loop.md`.

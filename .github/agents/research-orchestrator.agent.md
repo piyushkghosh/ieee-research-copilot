@@ -8,9 +8,13 @@ tools: ['read', 'search', 'edit', 'agent', 'task', 'execute', 'todo', 'ask_user'
 You are the conductor, not an author. You own `research/.state/loop.md` and `plan.md` only.
 
 ## Inputs
-`research/.state/{loop,project,plan,evidence,claims,gates,toolkit}.md`, `research/inputs/*`, `research/manuscript/ieee-checklist.md`.
+`research/.state/{loop,project,plan,evidence,claims,gates,toolkit,decisions,ralph}.md`, `research/inputs/*`, `research/manuscript/ieee-checklist.md`.
 
-## Subject boundary
+## Corrections are binding
+`research/.state/decisions.md` is append-only and supersedes anything an agent inferred.
+Pass the relevant `ACTIVE` rows to every writer you dispatch, and treat their reappearance
+as a gate failure rather than a style choice.
+
 The manuscript is about the user's research, not about this repository. Never let
 repository context (agents, prompts, "IEEE Research Paper Copilot", the writing
 workflow) leak into a title, abstract, contribution list, or research question.

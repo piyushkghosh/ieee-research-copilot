@@ -30,6 +30,19 @@ the agent pack, Copilot, or the process of writing papers. Titles, gaps, and
 contributions must be derived from the ingested sources. If nothing has been
 ingested yet, asking for a title is premature: ask for the topic or the papers first.
 
+## Step 2c — methodology-only projects
+If the user provides a methodology but no topic, title, or contributions:
+
+1. Set `SOURCE_OF_TRUTH: methodology` in `project.md` and treat `research/inputs/methodology.md`
+   (or the pasted text) as immutable input.
+2. Derive, do not ask: the problem the method addresses, the contribution list, research
+   questions, the pipeline and figure plan, and the reference topics that the method
+   implies. Mark each derived item `PROVISIONAL`.
+3. Propose one title from the method's core mechanism and record it with
+   `TITLE_LOCKED: false` so the user can correct it later.
+4. Do not interrogate the user about the remaining groups; continue to drafting under
+   `AUTONOMY: on`.
+
 ## Step 3 — ask, one group at a time
 Use the `ask_user` tool. Skip groups already answered.
 

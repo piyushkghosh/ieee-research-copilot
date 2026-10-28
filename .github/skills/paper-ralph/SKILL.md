@@ -62,6 +62,17 @@ story passes.
 5. Fail → append the failure to `progress.md`, increment `rounds`, re-dispatch the same owner with only the failure text. Three failed rounds on one story = genuine blocker: report and stop.
 6. Stop when `ralph-status.mjs` exits 0, or on a real blocker.
 
+## Two steps that are never optional
+
+- **Read corrections first.** Before dispatching any writing story, read
+  `research/.state/decisions.md` and include every `ACTIVE` row that touches the target
+  file in the dispatch prompt.
+- **Humanize before passing.** A writing story does not pass until its file has been
+  humanized this round and the numbers invariant holds:
+  `cp f f.pre-humanize` → humanizer → `bash scripts/audit-tex.sh --numbers f --against f.pre-humanize`.
+  A diff is CRITICAL: restore and retry. No file ships un-humanized, including revisions
+  requested by the user mid-run.
+
 ## Parallelism
 
 Stories writing disjoint files may be dispatched in the same turn (e.g. literature and
