@@ -103,6 +103,31 @@ Windows-specific notes:
 
 ---
 
+## Low-token autonomous mode
+
+`/paper-start` interviews you. If you would rather spend credits on the paper than on answers, use:
+
+```
+/paper-run
+```
+
+It assumes sensible defaults (recorded as `ASSUMED (auto)` in `research/.state/project.md`), writes `research/.state/ralph.json`, and then drives one story per step until every story passes:
+
+```
+[3/15] Research plan — PASS (rounds: 1)
+[4/15] Literature — PASS
+...
+```
+
+Rules it follows: one question per run maximum (data, credentials, venue rules only), no "should I continue?" prompts, no per-step essays, a single report at the end. Check progress any time with:
+
+```bash
+node scripts/ralph-status.mjs          # table
+node scripts/ralph-status.mjs --next   # next story + its acceptance check
+```
+
+If a story fails three rounds it stops and tells you exactly what only you can supply. In `degraded-markdown` mode the compile story passes as `SKIPPED` — run `bash scripts/bootstrap.sh --tex-only` to get a real PDF.
+
 ## What `/paper-start` does
 
 1. **Toolchain preflight** — runs `scripts/preflight.sh` (Node) or falls back to Bash, probes TeX engines, `IEEEtran`, PDF tools, Python, browsers and SVG converters, and writes `research/.state/toolkit.md` with `MODE: full-tex` or `MODE: degraded-markdown` plus the exact install command for anything missing. It never runs `sudo` and never installs silently.

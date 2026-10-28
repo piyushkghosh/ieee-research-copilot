@@ -1,0 +1,141 @@
+{
+  "goal": "Manuscript drafted, every gate PASS, and a build artifact exists (or compile gate SKIPPED in degraded mode).",
+  "autonomy": true,
+  "stories": [
+    {
+      "id": 1,
+      "title": "Intake",
+      "owner": "research-orchestrator",
+      "acceptance": "project.md has TITLE, VENUE, TEMPLATE; research/inputs read; assumptions recorded",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "title": "Preflight / bootstrap",
+      "owner": "research-orchestrator",
+      "acceptance": "research/.state/toolkit.md exists and MODE is set; IEEEtran present or degraded mode recorded",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "title": "Research plan",
+      "owner": "research-planner",
+      "acceptance": "plan.md has objectives, RQs, contributions mapped to sections and experiments",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "title": "Literature",
+      "owner": "literature-review",
+      "acceptance": "literature-matrix.md has >=1 verified row per cited work; no CLAIM_UNVERIFIED in the final claim set",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "title": "Methodology",
+      "owner": "methodology",
+      "acceptance": "sections/methodology.tex written, symbols defined, design decisions justified",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "title": "Experimental design + implementation",
+      "owner": "experimental-design",
+      "acceptance": "experiments/design.md specifies baselines, metrics, splits, runs, statistical test",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "title": "Results",
+      "owner": "results-analysis",
+      "acceptance": "results.tex values all trace to MEASURED evidence rows",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 8,
+      "title": "Body writing",
+      "owner": "ieee-section-writer",
+      "acceptance": "intro, related, discussion, conclusion drafted within word budgets",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 9,
+      "title": "Abstract + keywords + title check",
+      "owner": "abstract",
+      "acceptance": "bash scripts/audit-tex.sh --words passes and abstract is 150-250 words",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 10,
+      "title": "Figures + tables",
+      "owner": "figure-table",
+      "acceptance": "every float referenced; captions below figures, titles above tables",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 11,
+      "title": "References",
+      "owner": "references",
+      "acceptance": "bash scripts/audit-tex.sh --citations resolves every cite key",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 12,
+      "title": "Integrity + citation gates",
+      "owner": "research-integrity-rules",
+      "acceptance": "both gates return VERDICT: PASS",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 13,
+      "title": "Humanizer + style + consistency",
+      "owner": "humanizer",
+      "acceptance": "numbers diff empty; language and consistency gates PASS",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 14,
+      "title": "Compile",
+      "owner": "research-orchestrator",
+      "acceptance": "bash scripts/build-pdf.sh exits 0 with BUILD: PASS, or BUILD: SKIPPED in degraded mode",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    },
+    {
+      "id": 15,
+      "title": "Final submission gate",
+      "owner": "final-submission-gate",
+      "acceptance": "VERDICT: PASS and SUBMISSION-CHECKLIST.md written",
+      "passes": false,
+      "rounds": 0,
+      "notes": ""
+    }
+  ]
+}

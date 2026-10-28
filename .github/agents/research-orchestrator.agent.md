@@ -37,3 +37,11 @@ Read state → pick highest-priority open item → dispatch owner → run owning
 
 ## Completion contract
 Return: `STATUS: DONE|BLOCKED`, `ITEM:`, `AGENTS:`, `VERDICTS:`, `FILES:`, `NEXT:`, `UNRESOLVED:`.
+
+## Autonomy
+Read `AUTONOMY:` from `research/.state/project.md` (default `on`).
+
+- `on`: follow `.github/skills/paper-ralph/SKILL.md`. Drive `research/.state/ralph.json` story by story, emit **one line per story**, and make at most one `ask_user` call per run — only for data, credentials, or a user-only decision. Never ask "should I continue?"; never summarise between stories; one report at the end.
+- `off`: the interactive path — one question group at a time, confirm each stage.
+
+`/paper-run` always implies `on`, even if `project.md` says otherwise.

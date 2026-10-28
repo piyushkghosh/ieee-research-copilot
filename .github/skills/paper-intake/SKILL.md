@@ -59,3 +59,18 @@ Use the `ask_user` tool. Skip groups already answered.
 ## Step 5 — stop
 Report what was collected, what is still unknown, and the exact next action.
 Do not start drafting in the same turn.
+
+## Autonomous mode (when the user says "don't ask me", "just do it", or /paper-run)
+
+Ask nothing except the single opening line in `paper-ralph`. Then:
+
+- Title: derive from `topic.md`/`papers/`; if nothing exists, use a descriptive
+  placeholder and record `TITLE_AUTO: true` so it is revisited, never an invented claim.
+- Paper content: use `draft.md`/`topic.md`; list contributions only where the draft supports them.
+- Methodology: if not supplied, mark `PROPOSED` and continue — do not ask.
+- Diagram titles: derive from the methodology; record them in `figures.md`.
+- References: use `refs.txt`/`refs.bib`; verify each; leave the list as-is if nothing else exists.
+- Template: IEEEtran conference unless a template is present.
+- Record every default as `ASSUMED (auto)` in `project.md`.
+
+Do not produce per-group status essays. Write the files, then one line: `intake complete — MODE: <mode>, N assumptions recorded`.
