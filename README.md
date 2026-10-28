@@ -170,6 +170,42 @@ node scripts/ralph-status.mjs --next   # next story + its acceptance check
 
 If a story fails three rounds it stops and tells you exactly what only you can supply. In `degraded-markdown` mode the compile story passes as `SKIPPED` — run `bash scripts/bootstrap.sh --tex-only` to get a real PDF.
 
+## Keeping Copilot credits low
+
+A full run is a chain of subagent dispatches. Each dispatch is a billed request, so the pack is tuned to spend as few as possible.
+
+| Lever | Default | Effect |
+|---|---|---|
+| Body sections batched | one `ieee-section-writer` dispatch writes all 8 body files | 8 requests → 1 |
+| `max_rounds: 2` | in `research/.state/ralph.json` | caps retry storms |
+| Humanize once per story | not per round; plus one final whole-paper pass | removes repeat passes |
+| Compile once | only in the compile story | no re-runs per edit |
+| No progress essays | one line per story | fewer long outputs |
+
+Typical run: **~16 dispatches minimum**, ~22 with one retry each. If your run is far above that, check `research/.state/progress.md` for a story retrying repeatedly.
+
+### Use a cheaper model for mechanical stories
+
+Custom agents accept a `model:` field. Put a fast model on the mechanical reviewers and keep your premium model for planning:
+
+```yaml
+---
+name: ieee-format-rules
+description: "..."
+tools: ['read', 'search', 'execute']
+model: MAI-Code-1.1-Flash
+---
+```
+
+Do not set a cheap model on `research-planner`, `methodology`, or `final-reviewer` — that is where quality matters most.
+
+### Inspect before you spend
+
+```bash
+node scripts/ralph-status.mjs            # what remains
+node scripts/ralph-status.mjs --next     # what the next dispatch will be
+```
+
 ## What `/paper-start` does
 
 1. **Toolchain preflight** — runs `scripts/preflight.sh` (Node) or falls back to Bash, probes TeX engines, `IEEEtran`, PDF tools, Python, browsers and SVG converters, and writes `research/.state/toolkit.md` with `MODE: full-tex` or `MODE: degraded-markdown` plus the exact install command for anything missing. It never runs `sudo` and never installs silently.

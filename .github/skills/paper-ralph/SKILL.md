@@ -59,7 +59,7 @@ story passes.
 3. Run the acceptance check yourself (a script, `bash scripts/build-pdf.sh`, `bash scripts/audit-tex.sh`, or a gate agent). An acceptance check is evidence, not opinion.
 4. Pass → set `passes:true` in `ralph.json`, append one line to `research/.state/progress.md`
    (`<iso-time> | <id> <title> | PASS | <evidence>`), move on **without narrating**.
-5. Fail → append the failure to `progress.md`, increment `rounds`, re-dispatch the same owner with only the failure text. Three failed rounds on one story = genuine blocker: report and stop.
+5. Fail → append the failure to `progress.md`, increment `rounds`, re-dispatch the same owner with only the failure text. Two failed rounds on one story = blocker: report and stop.
 6. Stop when `ralph-status.mjs` exits 0, or on a real blocker.
 
 ## Two steps that are never optional
@@ -116,3 +116,13 @@ Story 16 runs after every writing story has passed and before `Compile`.
 
 This pass may not add, remove, reorder, or reword a technical claim. It is the last
 style touch, not a rewrite, and it never substitutes for the per-stage passes.
+
+## Cost discipline
+
+Each dispatch is a billed request. Rules:
+
+- **One dispatch per story.** Story 8 (body sections) is a single `ieee-section-writer` call that writes all eight body files; do not loop section by section.
+- **Two rounds maximum** (`max_rounds: 2` in `ralph.json`). After round 2, defer cosmetic MAJORs to `loop.md` and move on. Only CRITICAL issues earn a third dispatch.
+- **Humanize once per story**, at the story's end, with the numbers invariant. Do not humanize on every round.
+- **Compile once**, in the compile story.
+- Writers receive only their own inputs; no whole-manuscript reads outside gates.

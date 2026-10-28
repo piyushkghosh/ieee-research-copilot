@@ -95,6 +95,17 @@ Any diff in numbers, units, citations, DOIs, or figure references is CRITICAL: r
 the backup and re-dispatch. Humanizer never changes technical claims; formality is
 governed by `language-and-style-rules`.
 
+## Cost discipline
+
+Every dispatch costs a premium request, so spend deliberately.
+
+- One dispatch per story. Batch related work into a single subagent call: all body sections go to one `ieee-section-writer` dispatch, not eight.
+- Reading the whole manuscript is not free. Pass the writer only its own inputs plus its own target file; read neighbours only at gate time.
+- Maximum two rounds per story. If a gate still BLOCKs on cosmetic MAJORs after round 2, record them in `loop.md` as deferred and move on; only CRITICALs justify a third dispatch.
+- Humanize once per story, at the end of that story, not once per round. The final whole-paper pass (story 16) covers aggregate drift.
+- Compile once, in the compile story. Never re-run `build-pdf.sh` inside a writing round.
+- No status essays. A story reports one line; the run reports once at the end.
+
 ## Final approval
 - Run citation, integrity, reproducibility, consistency, style, formatting, and
   compile checks before declaring readiness.

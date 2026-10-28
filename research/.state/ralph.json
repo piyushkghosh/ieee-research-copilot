@@ -8,8 +8,7 @@
       "owner": "research-orchestrator",
       "acceptance": "project.md has TITLE, VENUE, TEMPLATE; research/inputs read; assumptions recorded",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 2,
@@ -17,8 +16,7 @@
       "owner": "research-orchestrator",
       "acceptance": "research/.state/toolkit.md exists and MODE is set; IEEEtran present or degraded mode recorded",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 3,
@@ -26,8 +24,7 @@
       "owner": "research-planner",
       "acceptance": "plan.md has objectives, RQs, contributions mapped to sections and experiments",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 4,
@@ -35,8 +32,7 @@
       "owner": "literature-review",
       "acceptance": "literature-matrix.md has >=1 verified row per cited work; no CLAIM_UNVERIFIED in the final claim set",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 5,
@@ -44,8 +40,7 @@
       "owner": "methodology",
       "acceptance": "sections/methodology.tex written, symbols defined, design decisions justified",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 6,
@@ -53,26 +48,23 @@
       "owner": "experimental-design",
       "acceptance": "experiments/design.md specifies baselines, metrics, splits, runs, statistical test",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 7,
-      "title": "Results",
+      "title": "Results + implementation section",
       "owner": "results-analysis",
-      "acceptance": "results.tex values all trace to MEASURED evidence rows",
+      "acceptance": "sections/results.tex and sections/implementation.tex exist, every number traces to a MEASURED row in evidence.md, python3 scripts/audit-tex.py --figures clean",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 8,
-      "title": "Body writing",
+      "title": "Body sections (intro, related, problem formulation, methodology, implementation, results, discussion, conclusion) in one dispatch",
       "owner": "ieee-section-writer",
-      "acceptance": "intro, related, discussion, conclusion drafted within word budgets",
+      "acceptance": "all 8 body .tex files written, audit-tex.py --citations clean, --figures clean, no TODO(evidence) markers left",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 9,
@@ -80,8 +72,7 @@
       "owner": "abstract",
       "acceptance": "bash scripts/audit-tex.sh --words passes and abstract is 150-250 words",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 10,
@@ -89,44 +80,31 @@
       "owner": "figure-table",
       "acceptance": "every float referenced; captions below figures, titles above tables",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 11,
+      "title": "Humanize every written section (per-stage)",
+      "owner": "humanizer",
+      "acceptance": "bash scripts/audit-tex.sh --numbers <section> --against <section>.pre-humanize reports numbers OK for every section touched in story 8",
+      "passes": false,
+      "rounds": 0
+    },
+    {
+      "id": 12,
       "title": "References",
       "owner": "references",
       "acceptance": "bash scripts/audit-tex.sh --citations resolves every cite key",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
-      "id": 12,
+      "id": 13,
       "title": "Integrity + citation gates",
       "owner": "research-integrity-rules",
       "acceptance": "both gates return VERDICT: PASS",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
-    },
-    {
-      "id": 13,
-      "title": "Humanizer + style + consistency",
-      "owner": "humanizer",
-      "acceptance": "numbers diff empty; language and consistency gates PASS",
-      "passes": false,
-      "rounds": 0,
-      "notes": ""
-    },
-    {
-      "id": 16,
-      "title": "Whole-paper humanization (final pass)",
-      "owner": "humanizer",
-      "acceptance": "bash scripts/final-humanize-check.sh --verify (exit 0; --snapshot before the pass)",
-      "passes": false,
-      "rounds": 0,
-      "notes": "cross-section pass over the assembled paper"
+      "rounds": 0
     },
     {
       "id": 14,
@@ -134,8 +112,7 @@
       "owner": "research-orchestrator",
       "acceptance": "bash scripts/build-pdf.sh exits 0 with BUILD: PASS, or BUILD: SKIPPED in degraded mode",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
     },
     {
       "id": 15,
@@ -143,8 +120,17 @@
       "owner": "final-submission-gate",
       "acceptance": "VERDICT: PASS and SUBMISSION-CHECKLIST.md written",
       "passes": false,
-      "rounds": 0,
-      "notes": ""
+      "rounds": 0
+    },
+    {
+      "id": 16,
+      "title": "Whole-paper humanization (final pass)",
+      "owner": "humanizer",
+      "acceptance": "bash scripts/final-humanize-check.sh --verify (exit 0; --snapshot before the pass)",
+      "passes": false,
+      "rounds": 0
     }
-  ]
+  ],
+  "profile": "lean",
+  "max_rounds": 2
 }

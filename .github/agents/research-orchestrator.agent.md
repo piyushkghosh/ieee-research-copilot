@@ -66,3 +66,10 @@ Read `AUTONOMY:` from `research/.state/project.md` (default `on`).
 - `off`: the interactive path — one question group at a time, confirm each stage.
 
 `/paper-run` always implies `on`, even if `project.md` says otherwise.
+
+## Cost discipline
+
+- One dispatch per story; batch by file ownership (all body sections in one `ieee-section-writer` call).
+- `max_rounds: 2` from `ralph.json`; after round 2 defer cosmetic MAJORs to `loop.md`, escalate only CRITICALs.
+- Humanizer once per story end; compile once in the compile story.
+- Report one line per story, one summary at the end. No progress essays.
