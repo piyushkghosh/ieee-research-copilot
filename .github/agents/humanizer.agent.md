@@ -43,3 +43,17 @@ Never change numbers, units, citations, DOIs, names, references, or claim streng
 
 ## Completion contract
 `STATUS: DONE|BLOCKED`, `FILE:`, `DELTA: words -N`, `NUMBERS: identical|DIFFER`, `UNRESOLVED:`, `EVIDENCE:`, `NEXT:`.
+
+## Whole-paper final pass
+Invoked once at the end, after all sections pass their own gates, with the whole
+`research/manuscript/sections/` directory in scope.
+
+- Read sections in manuscript order first, then edit. Fix only cross-section issues:
+  repeated sentences or openings, transitions that do not connect, terminology and
+  abbreviation drift, paragraph-length monotony, tells that only show at scale.
+- Each file keeps the invariant: numbers, units, citations, DOIs, figure/table
+  references byte-identical. Run `bash scripts/audit-tex.sh --numbers <file> --against
+  <baseline>` per edited file, or rely on `scripts/final-humanize-check.sh --verify`.
+- Never merge, split, reorder, or delete sections; never touch claims or structure.
+- Report: files touched, sentences rewritten, and confirmation that the verify step
+  returned exit 0.

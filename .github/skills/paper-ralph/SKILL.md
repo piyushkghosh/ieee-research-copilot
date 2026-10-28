@@ -101,3 +101,18 @@ Each story's `acceptance` must be checkable by a command or a gate verdict — n
 ## Degraded mode
 
 If `toolkit.md` says `degraded-markdown`, one line is enough: `compile gate SKIPPED (no TeX); run bash scripts/bootstrap.sh --tex-only for a PDF`. Do not stop the loop for this.
+
+## Final whole-paper pass (story 16)
+Story 16 runs after every writing story has passed and before `Compile`.
+
+1. `bash scripts/final-humanize-check.sh --snapshot`
+2. Dispatch `humanizer` in whole-paper mode over `research/manuscript/sections/*.tex` —
+   it reads the paper in order and fixes cross-section problems: repeated sentences,
+   abrupt transitions, inconsistent terminology or abbreviations, uneven paragraph
+   rhythm, tells that only appear at scale.
+3. `bash scripts/final-humanize-check.sh --verify` — exit 0 required.
+   Exit 1 = restore the changed files from `research/.state/final-humanize-baseline/`
+   and re-dispatch with the diff text; the story stays open.
+
+This pass may not add, remove, reorder, or reword a technical claim. It is the last
+style touch, not a rewrite, and it never substitutes for the per-stage passes.

@@ -203,7 +203,10 @@ One iteration = one open item, carried to a verdict:
 
 A gate cannot pass itself by rewriting the text — the eight rule gates are read-only. After three rounds on the same item the orchestrator stops and escalates to you instead of iterating forever.
 
-Gate order: content → humanizer → language → consistency → compile → final submission. The humanizer also runs inside **every** writing story, every round — not only once at the end.
+Gate order: content → humanizer → language → consistency → compile → final submission. The humanizer runs inside **every** writing story, every round, and then once more
+over the whole assembled paper (`/paper-run` story 16), verified by
+`bash scripts/final-humanize-check.sh --verify` so no number, unit, citation, DOI
+or figure reference can shift in the final pass.
 
 ### State lives on disk
 

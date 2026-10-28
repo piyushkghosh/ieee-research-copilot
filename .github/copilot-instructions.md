@@ -106,3 +106,17 @@ governed by `language-and-style-rules`.
   its owner agent as a subagent and verified by an independent check.
 - Independent units may run in parallel; units sharing a file do not.
 - If delegation is impossible, report it — never silently do the work inline.
+
+## Final whole-paper pass
+Per-section humanizing is not the last word. Once every section has passed its own
+gates, run one whole-paper humanization pass over the assembled manuscript, then
+prove nothing factual moved:
+
+1. `bash scripts/final-humanize-check.sh --snapshot`
+2. humanizer cross-section pass (repetition, transitions, uniform voice, terminology,
+   paragraph rhythm) — edits style only
+3. `bash scripts/final-humanize-check.sh --verify`
+
+Exit 1 means a number, unit, citation, DOI or figure reference changed: restore from
+`research/.state/final-humanize-baseline/`, re-dispatch, and do not compile. The
+compile gate and `final-submission-gate` come after this pass, never before.

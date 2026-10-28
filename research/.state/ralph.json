@@ -120,6 +120,15 @@
       "notes": ""
     },
     {
+      "id": 16,
+      "title": "Whole-paper humanization (final pass)",
+      "owner": "humanizer",
+      "acceptance": "bash scripts/final-humanize-check.sh --verify (exit 0; --snapshot before the pass)",
+      "passes": false,
+      "rounds": 0,
+      "notes": "cross-section pass over the assembled paper"
+    },
+    {
       "id": 14,
       "title": "Compile",
       "owner": "research-orchestrator",

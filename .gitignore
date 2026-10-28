@@ -22,3 +22,5 @@ research/manuscript/literature-matrix.md
 research/inputs/papers/*.pdf
 research/figures/*/
 research/manuscript/build/
+
+research/.state/final-humanize-baseline/
